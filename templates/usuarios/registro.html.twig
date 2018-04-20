@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Registre-se - {% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <h3>Registre-se</h3>
+        <hr>
+        {% form_theme form with 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(form, {"attr": {"novalidate": "novalidate"}}) }}
+
+        {{ form_row(form._token) }}
+
+        {{ form_label(form.nome) }}
+        {{ form_widget(form.nome) }}
+
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+
+        {{ form_label(form.senha.first) }}
+        {{ form_widget(form.senha.first) }}
+
+        {{ form_label(form.senha.second) }}
+        {{ form_widget(form.senha.second) }}
+
+        <hr>
+
+        {{ form_widget(form.enviar) }}
+
+    </div>
+
+{% endblock %}

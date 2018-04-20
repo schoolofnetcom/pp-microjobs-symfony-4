@@ -1,0 +1,35 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        main:
+            entity: { class: App\Entity\Usuario }
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+
+            form_login:
+                login_path: login
+                check_path: login
+                default_target_path: painel
+                always_use_default_target_path: true
+
+                username_parameter: email
+                password_parameter: senha
+
+            logout:
+                path: /usuario/logout
+                target: /
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/painel, roles: ROLE_ADMIN }
+
+    encoders:
+        App\Entity\Usuario:
+            algorithm: bcrypt
+            cost: 12
