@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+{% block title %}Painel do usuário - {% endblock %}
+{% block body %}
+    <div class="container mt-5">
+        <h1>Painel do usuário</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <h3 class="card-header text-center  text-white bg-info">Saldo Total</h3>
+                    <div class="card-body">
+                        <h4 class="text-center text-danger">R$ 130,00</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <h3 class="card-header text-center  text-white bg-danger">Saldo não liberado</h3>
+                    <div class="card-body">
+                        <h4 class="text-center text-danger">R$ 40,00</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <h3 class="card-header text-center text-white bg-success">Saldo disponível</h3>
+                    <div class="card-body">
+                        <h4 class="text-center text-danger">R$ 90,00</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action active">Meus microjobs</a>
+                    <a href="#" class="list-group-item list-group-item-action">Vendidos</a>
+                    <a href="#" class="list-group-item list-group-item-action">Rendimentos</a>
+                    <a href="#" class="list-group-item list-group-item-action">Dados Pessoais</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row mb-2">
+                    <div class="col-md-4">
+                        <select name="" id="" class="form-control-sm form-control float-left">
+                            <option value="">Filtrar Microjob por</option>
+                            <option value="">Ativos</option>
+                            <option value="">Inativos</option>
+                            <option value="">Excluídos</option>
+                            <option value="">Em </option>
+                            <option value="">Rejeitados</option>
+                        </select>
+                    </div>
+                    <div class="offset-4 col-md-4">
+                        <a href="" class="btn btn-block btn-primary float-right">Cadastrar MicroJob</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img src="http://via.placeholder.com/60x60" alt="">
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Título completo do microjob vai aqui nesse ponto. Nome grande pra ver se vai caber.</h5>
+                            </div>
+                            <div class="col-md-2">
+                                <p>25/01/2018</p>
+                            </div>
+                            <div class="col-md-1">
+                                <p class="badge badge-warning text-white">Em análise</p>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="" class="float-right btn btn-danger btn-sm"><i class="fa fa-trash-alt"></i></a>
+                                <a href="" class="float-right btn btn-success btn-sm mr-1"><i class="fa fa-pencil-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

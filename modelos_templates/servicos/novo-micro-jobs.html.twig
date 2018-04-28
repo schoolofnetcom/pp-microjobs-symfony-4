@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h3>{{ block('title') }}</h3>
+        <hr>
+        <!-- Inicio form -->
+
+        <div class="row">
+            <div class="col-md-12">
+                {# campo titulo #}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {# campo prazo_entrega #}
+                <small class="form-text text-muted">prazo em dias</small>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {# campo categorias #}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {# campo descricao #}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {# campo informacoes_adicionais #}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {# campo imagem #}
+            </div>
+        </div>
+
+        <hr>
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {# campo bt_enviar #}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block title %}
+    Cadastrar novo MicroJob
+{% endblock %}
+

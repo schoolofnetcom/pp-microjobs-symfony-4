@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h2></h2>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="" alt="" class="img-fluid img-thumbnail">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <h3>Descrição</h3>
+                        
+                    </div>
+                </div>
+                {% if job.informacoesAdicionais %}
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <h3>Informações adicionais</h3>
+                        
+                    </div>
+                </div>
+                {% endif %}
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        {# laço de categorias #} 
+                            <span class="badge badge-secondary"></span>
+                        {# fim laço de categorias #}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Contratar serviço</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="display-3 text-center text-danger text-lg-center mb-4">R$ </h4>
+                        <a href="#" class="btn btn-lg btn-block btn-outline-success">Contratar</a>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h3>Detalhes do Profissional</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block title %}
+
+    Titulo
+
+{% endblock %}
+

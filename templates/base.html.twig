@@ -29,21 +29,9 @@
         </button>
         <div class="container collapse navbar-collapse" id="navbarSupportedContent">
             <a class="navbar-brand" href="{{ path("default") }}"><i class="fa fa-at"></i> Microjobs SoN</a>
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Vejas as categorias
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Buscar microjob por ... " aria-label="Search">
+            {{ render(controller('App\\Controller\\CategoriasController::listar_topo')) }}
+            <form class="form-inline" method="get" action="">
+                <input class="form-control mr-sm-2" name="busca" type="search" value="{{ app.request.get('busca') }}" placeholder="Buscar microjob por ... " aria-label="Search">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
             </form>
             <ul class="navbar-nav">

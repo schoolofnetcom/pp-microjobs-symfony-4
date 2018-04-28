@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -67,9 +69,15 @@ class Usuario implements UserInterface
      */
     private $roles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Servico", mappedBy="usuario")
+     */
+    private $servicos;
+
     public function __construct()
     {
         $this->status = false;
+        $this->servicos = new ArrayCollection();
     }
 
     public function getId()
@@ -232,5 +240,36 @@ class Usuario implements UserInterface
     public function eraseCredentials()
     {
         return null;
+    }
+
+    /**
+     * @return Collection|Servico[]
+     */
+    public function getServicos(): Collection
+    {
+        return $this->servicos;
+    }
+
+    public function addServico(Servico $servico): self
+    {
+        if (!$this->servicos->contains($servico)) {
+            $this->servicos[] = $servico;
+            $servico->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeServico(Servico $servico): self
+    {
+        if ($this->servicos->contains($servico)) {
+            $this->servicos->removeElement($servico);
+            // set the owning side to null (unless already changed)
+            if ($servico->getUsuario() === $this) {
+                $servico->setUsuario(null);
+            }
+        }
+
+        return $this;
     }
 }

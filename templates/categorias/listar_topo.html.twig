@@ -1,0 +1,12 @@
+<ul class="navbar-nav">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Vejas as categorias
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for categoria in categorias %}
+            <a class="dropdown-item" href="#">{{ categoria.nome }}</a>
+            {% endfor %}
+        </div>
+    </li>
+</ul>

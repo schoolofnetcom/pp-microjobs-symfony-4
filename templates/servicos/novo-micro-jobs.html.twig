@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h3><a href="{{ path('painel') }}" title="Retornar ao painel do usuário"><i class="fa fa-backward"></i></a> {{ block('title') }}</h3>
+        <hr>
+        {% form_theme form with 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(form, {"attr": {"novalidate": "novalidade"}}) }}
+
+        {{ form_row(form._token) }}
+
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_label(form.titulo) }}
+                {{ form_widget(form.titulo) }}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {{ form_label(form.prazo_entrega) }}
+                {{ form_widget(form.prazo_entrega, {"attr": {"min": 0, "max": 30, "steps": 1}}) }}
+                <small class="form-text text-muted">prazo em dias</small>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {{ form_label(form.categorias) }}
+                {{ form_widget(form.categorias) }}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {{ form_label(form.descricao) }}
+                {{ form_widget(form.descricao) }}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {{ form_label(form.informacoes_adicionais) }}
+                {{ form_widget(form.informacoes_adicionais) }}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {{ form_label(form.imagem) }}
+                {{ form_widget(form.imagem) }}
+            </div>
+        </div>
+
+        <hr>
+        <div class="row mt-2">
+            <div class="col-md-12">
+                {{ form_widget(form.bt_salvar) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+    Cadastrar novo MicroJob
+{% endblock %}
+

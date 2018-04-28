@@ -2,6 +2,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'pt_BR'
+    caminho_img_job: '%kernel.project_dir%/public/uploads/jobs'
 
 services:
     # default configuration for services in *this* file
