@@ -27,9 +27,15 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/painel, roles: ROLE_ADMIN }
+        - { path: ^/painel, roles: ROLE_FREELA }
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_CLIENTE
+        ROLE_CLIENTE: ROLE_FREELA
 
     encoders:
         App\Entity\Usuario:
             algorithm: bcrypt
             cost: 12
+
+    always_authenticate_before_granting: true

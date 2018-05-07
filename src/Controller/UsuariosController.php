@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UsuariosController extends Controller
@@ -64,20 +65,29 @@ class UsuariosController extends Controller
             $token = md5(uniqid());
             $usuario->setToken($token);
 
-            $usuario->setRoles("ROLE_ADMIN");
+            $usuario->setRoles("ROLE_FREELA");
 
             $this->em->persist($usuario);
             $this->em->flush();
 
-            $mensagem = (new \Swift_Message($usuario->getNome() . ", ative sua conta no MicroJobs Son"))
-                ->setFrom('noreply@email.com')
-                ->setTo([$usuario->getEmail() => $usuario->getNome()])
-                ->setBody($this->renderView("emails/usuarios/registro.html.twig", [
+            $this->get('email')->enviar(
+                $usuario->getNome() . ", ative sua conta no MicroJobs Son",
+                [$usuario->getEmail() => $usuario->getNome()],
+                "emails/usuarios/registro.html.twig",[
                     'nome' => $usuario->getNome(),
                     'token' => $usuario->getToken()
-                ]), 'text/html');
+                ]
+            );
 
-            $mailer->send($mensagem);
+//            $mensagem = (new \Swift_Message($usuario->getNome() . ", ative sua conta no MicroJobs Son"))
+//                ->setFrom('noreply@email.com')
+//                ->setTo([$usuario->getEmail() => $usuario->getNome()])
+//                ->setBody($this->renderView("emails/usuarios/registro.html.twig", [
+//                    'nome' => $usuario->getNome(),
+//                    'token' => $usuario->getToken()
+//                ]), 'text/html');
+//
+//            $mailer->send($mensagem);
 
             $this->addFlash("success", "Cadastrado com sucesso! Verifique seu e-mail para completar o cadastro!");
             return $this->redirectToRoute("default");
@@ -100,5 +110,30 @@ class UsuariosController extends Controller
 
         $this->addFlash("success", "Cadastro foi ativado com sucesso! Informe seu e-mail e senha para acessar o sistema!");
         return $this->redirectToRoute("login");
+    }
+
+    /**
+     * @Route("/painel/usuario/mudar-para-cliente", name="mudar_para_cliente")
+     * @Template("usuarios/mudar-para-cliente.html.twig")
+     */
+    public function mudar_para_cliente()
+    {
+
+    }
+
+    /**
+     * @Route("/painel/usuario/mudar-para-cliente/confirmar", name="confirmar_mudar_para_cliente")
+     */
+    public function confimar_mudar_para_cliente(UserInterface $user)
+    {
+        $usuario = $this->em->getRepository(Usuario::class)->find($user);
+        $usuario->limparRoles();
+        $usuario->setRoles("ROLE_CLIENTE");
+
+        $this->em->persist($usuario);
+        $this->em->flush();
+
+        $this->addFlash("success", "Seu perfil foi alterado para Cliente");
+        return $this->redirectToRoute("painel");
     }
 }

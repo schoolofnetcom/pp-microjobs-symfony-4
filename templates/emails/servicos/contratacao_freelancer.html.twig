@@ -1,0 +1,13 @@
+{% extends "emails/email_base.html.twig" %}
+
+{% block body %}
+    <tr>
+        <td>
+            <p>Olá {{ servico.usuario.nome }},</p>
+            <p>
+                Você foi contratado por <strong>{{ cliente.nome }}</strong>
+                para o serviço {{ servico.titulo }}.
+            </p>
+        </td>
+    </tr>
+{% endblock %}

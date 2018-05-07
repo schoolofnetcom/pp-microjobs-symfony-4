@@ -74,10 +74,22 @@ class Usuario implements UserInterface
      */
     private $servicos;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Contratacoes", mappedBy="cliente")
+     */
+    private $compras;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Contratacoes", mappedBy="freelancer")
+     */
+    private $vendas;
+
     public function __construct()
     {
         $this->status = false;
         $this->servicos = new ArrayCollection();
+        $this->compras = new ArrayCollection();
+        $this->vendas = new ArrayCollection();
     }
 
     public function getId()
@@ -175,6 +187,12 @@ class Usuario implements UserInterface
         return $this;
     }
 
+    public function limparRoles(): self
+    {
+        $this->roles = [];
+        return $this;
+    }
+
     /**
      * Returns the roles granted to the user.
      *
@@ -267,6 +285,68 @@ class Usuario implements UserInterface
             // set the owning side to null (unless already changed)
             if ($servico->getUsuario() === $this) {
                 $servico->setUsuario(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contratacoes[]
+     */
+    public function getCompras(): Collection
+    {
+        return $this->compras;
+    }
+
+    public function addCompra(Contratacoes $compra): self
+    {
+        if (!$this->compras->contains($compra)) {
+            $this->compras[] = $compra;
+            $compra->setCliente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompra(Contratacoes $compra): self
+    {
+        if ($this->compras->contains($compra)) {
+            $this->compras->removeElement($compra);
+            // set the owning side to null (unless already changed)
+            if ($compra->getCliente() === $this) {
+                $compra->setCliente(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contratacoes[]
+     */
+    public function getVendas(): Collection
+    {
+        return $this->vendas;
+    }
+
+    public function addVenda(Contratacoes $venda): self
+    {
+        if (!$this->vendas->contains($venda)) {
+            $this->vendas[] = $venda;
+            $venda->setFreelancer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVenda(Contratacoes $venda): self
+    {
+        if ($this->vendas->contains($venda)) {
+            $this->vendas->removeElement($venda);
+            // set the owning side to null (unless already changed)
+            if ($venda->getFreelancer() === $this) {
+                $venda->setFreelancer(null);
             }
         }
 

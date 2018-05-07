@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block title %}Painel do usuário - {% endblock %}
+{% block body %}
+    <div class="container mt-5">
+        {% block topo_painel %}
+        {% endblock %}
+        <hr>
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <div class="list-group list-group-flush">
+                    <!-- TODO: FAZER FUNCIONAR CLASS ACTIVE -->
+                    <a href="#" class="list-group-item list-group-item-action">Meus microjobs</a>
+                    {% if is_granted("ROLE_CLIENTE") %}
+                    <a href="{{ path('listar_compras') }}" class="list-group-item list-group-item-action">Compras</a>
+                    {% endif %}
+                    {% if is_granted("ROLE_FREELA") %}
+                    <a href="{{ path("listar_vendas") }}" class="list-group-item list-group-item-action">Vendas</a>
+                    {% endif %}
+                    <a href="#" class="list-group-item list-group-item-action">Dados Pessoais</a>
+                    {% if app.user.roles.0 == "ROLE_FREELA" %}
+                    <a href="{{ path("mudar_para_cliente") }}" class="list-group-item list-group-item-action bg-light text-danger">
+                        Torne-se um Cliente
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-9">
+                {% block body_painel %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".bt_excluir_servico").click(function(ev){
+                ev.preventDefault();
+
+                if(confirm("Deseja excluir esse job?")) {
+                    var url = $(this).prop("href");
+                    window.location = url;
+                }
+            });
+        });
+    </script>
+{% endblock %}

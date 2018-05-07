@@ -1,0 +1,44 @@
+{% extends 'base_painel.html.twig' %}
+
+{% block topo_painel %}
+    <h3>Listando compras</h3>
+{% endblock %}
+
+{% block body_painel %}
+    {% for compra in compras %}
+    <div class="card mt-2">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-1">
+                    <img src="{{ asset(caminho_imagens ~ compra.servico.imagem) }}" alt="{{ compra.servico.titulo }}" width="60">
+                </div>
+                <div class="col-md-5">
+                    <h5>{{ compra.servico.titulo }}</h5>
+                </div>
+                <div class="col-md-2">
+                    <p>{{ compra.dataCadastro|date("d/m/Y") }}</p>
+                </div>
+                <div class="col-md-3">
+                    <p>{{ compra.freelancer.nome }}</p>
+                </div>
+                <div class="col-md-1">
+                    {#<a href="" class="float-right btn btn-danger btn-sm"><i class="fa fa-trash-alt"></i></a>#}
+                    {#<a href="" class="float-right btn btn-success btn-sm mr-1"><i class="fa fa-pencil-alt"></i></a>#}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="card mb-2">
+        <div class="card-body">
+            <div class="alert alert-warning">Nenhum serviço encontrado.</div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block title %}
+    Listando compras de {{ app.user.nome }} -
+{% endblock %}
+

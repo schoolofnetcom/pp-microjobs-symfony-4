@@ -4,7 +4,7 @@ swiftmailer:
     #delivery_addresses: ['me@example.com']
     transport: smtp
     username: envioson@gmail.com
-    password: q!w@e#r$t%
+    password: azsxdcfv!@#
     host: smtp.gmail.com
     encryption: ssl
     port: 465

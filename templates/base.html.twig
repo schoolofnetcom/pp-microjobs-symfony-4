@@ -47,7 +47,24 @@
                                aria-haspopup="true" aria-expanded="false"
                             ></a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="nav_usuario_logado">
-                                <h6 class="dropdown-header">Opções</h6>
+                                <h6 class="dropdown-header">
+                                    Perfil atual:
+                                    {#{% if app.user.roles.0 == 'ROLE_FREELA' %}#}
+                                        {#<strong>Freelancer</strong>#}
+                                    {#{% elseif app.user.roles.0 == 'ROLE_CLIENTE' %}#}
+                                        {#<strong>Cliente</strong>#}
+                                    {#{% else %}#}
+                                        {#<strong>Administrador</strong>#}
+                                    {#{% endif %}#}
+
+                                    {% if is_granted("ROLE_ADMIN") %}
+                                        <strong>Administrador</strong>
+                                    {% elseif is_granted("ROLE_CLIENTE")  %}
+                                        <strong>Cliente</strong>
+                                    {% else %}
+                                        <strong>Freelancer</strong>
+                                    {% endif %}
+                                </h6>
                                 <a href="#" class="dropdown-item">Minha Conta</a>
                                 <a href="#" class="dropdown-item">Meus Microjobs</a>
                                 <div class="dropdown-divider"></div>

@@ -107,9 +107,15 @@ class Servico
      */
     private $usuario;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Contratacoes", mappedBy="servico")
+     */
+    private $contratacoes;
+
     public function __construct()
     {
         $this->categorias = new ArrayCollection();
+        $this->contratacoes = new ArrayCollection();
     }
 
     public function getId()
@@ -273,6 +279,37 @@ class Servico
     public function setUsuario(?Usuario $usuario): self
     {
         $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contratacoes[]
+     */
+    public function getContratacoes(): Collection
+    {
+        return $this->contratacoes;
+    }
+
+    public function addContrataco(Contratacoes $contrataco): self
+    {
+        if (!$this->contratacoes->contains($contrataco)) {
+            $this->contratacoes[] = $contrataco;
+            $contrataco->setServico($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContrataco(Contratacoes $contrataco): self
+    {
+        if ($this->contratacoes->contains($contrataco)) {
+            $this->contratacoes->removeElement($contrataco);
+            // set the owning side to null (unless already changed)
+            if ($contrataco->getServico() === $this) {
+                $contrataco->setServico(null);
+            }
+        }
 
         return $this;
     }

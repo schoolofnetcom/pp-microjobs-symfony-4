@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {# for #}
+        <div class="card mt-2">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-1">
+                        <img src="" alt="" width="60">
+                    </div>
+                    <div class="col-md-5">
+                        <h5>{# titulo #}</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <p>{# data #}</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p>{# freelancer ou cliente #}</p>
+                    </div>
+                    <div class="col-md-1">
+                        {#<a href="" class="float-right btn btn-danger btn-sm"><i class="fa fa-trash-alt"></i></a>#}
+                        {#<a href="" class="float-right btn btn-success btn-sm mr-1"><i class="fa fa-pencil-alt"></i></a>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {#{% else %}#}
+        <div class="card mb-2">
+            <div class="card-body">
+                <div class="alert alert-warning">Nenhum serviço encontrado.</div>
+            </div>
+        </div>
+    {#{% endfor %}#}
+
+{% endblock %}
+
+{% block title %}
+    Listando compras de {{ app.user.nome }} -
+{% endblock %}
+
