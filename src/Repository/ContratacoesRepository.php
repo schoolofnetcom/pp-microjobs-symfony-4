@@ -47,4 +47,16 @@ class ContratacoesRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function retornaFaturamento()
+    {
+        $sql = "SELECT 
+                    SUM(valor) as faturamento, data_cadastro
+                FROM
+                    contratacoes    
+                GROUP BY month(data_cadastro)
+                ORDER BY data_cadastro desc;";
+
+        return $this->getEntityManager()->getConnection()->executeQuery($sql)->fetchAll(\PDO::FETCH_OBJ);
+    }
 }

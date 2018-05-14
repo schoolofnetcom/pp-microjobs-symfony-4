@@ -13,8 +13,10 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: painel
-                always_use_default_target_path: true
+#                default_target_path: painel
+#                always_use_default_target_path: true
+
+                success_handler: redireciona.login
 
                 username_parameter: email
                 password_parameter: senha
@@ -28,6 +30,7 @@ security:
     access_control:
         - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/painel, roles: ROLE_FREELA }
+        - { path: ^/admin, roles: ROLE_ADMIN }
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_CLIENTE

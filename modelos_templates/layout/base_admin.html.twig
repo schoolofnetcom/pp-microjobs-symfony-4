@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}Administração - {% endblock %}
+{% block body %}
+    <div class="container mt-5">
+        {% block topo %}
+
+        {% endblock %}
+        <hr>
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <div class="list-group list-group-flush">
+                    <!-- @TODO: FAZER FUNCIONAR classe active -->
+                    <a href="#" class="list-group-item list-group-item-action ">Analisar Jobs</a>
+                    <a href="#" class="list-group-item list-group-item-action ">Gerenciar Usuários</a>
+                    <a href="#" class="list-group-item list-group-item-action ">Financeiro</a>
+                    <a href="#" class="list-group-item list-group-item-action ">Faturamento</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                {% block body_admin %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

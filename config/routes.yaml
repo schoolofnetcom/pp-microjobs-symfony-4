@@ -1,2 +1,7 @@
 logout:
     path: /usuario/logout
+
+admin:
+    resource: "@AdminBundle"
+    type: annotation
+    prefix: /admin
