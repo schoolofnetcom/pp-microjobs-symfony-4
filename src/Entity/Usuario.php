@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
  * @UniqueEntity("email", message="Esse e-mail já está em uso.")
  */
-class Usuario implements UserInterface
+class Usuario implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -83,6 +83,11 @@ class Usuario implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Contratacoes", mappedBy="freelancer")
      */
     private $vendas;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\DadosPessoais", cascade={"persist", "remove"})
+     */
+    private $dados_pessoais;
 
     public function __construct()
     {
@@ -351,5 +356,56 @@ class Usuario implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getDadosPessoais(): ?DadosPessoais
+    {
+        return $this->dados_pessoais;
+    }
+
+    public function setDadosPessoais(?DadosPessoais $dados_pessoais): self
+    {
+        $this->dados_pessoais = $dados_pessoais;
+
+        return $this;
+    }
+
+    /**
+     * String representation of object
+     * @link http://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->nome,
+            $this->email,
+            $this->senha,
+            $this->roles,
+            $this->status
+        ]);
+    }
+
+    /**
+     * Constructs the object
+     * @link http://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->nome,
+            $this->email,
+            $this->senha,
+            $this->roles,
+            $this->status
+            ) = unserialize($serialized, ['allowed_class' => false]);
     }
 }

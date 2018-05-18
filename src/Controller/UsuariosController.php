@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Usuario;
+use App\Form\UsuarioDadosPessoaisType;
 use App\Form\UsuarioType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,7 +74,7 @@ class UsuariosController extends Controller
             $this->get('email')->enviar(
                 $usuario->getNome() . ", ative sua conta no MicroJobs Son",
                 [$usuario->getEmail() => $usuario->getNome()],
-                "emails/usuarios/registro.html.twig",[
+                "emails/usuarios/registro.html.twig", [
                     'nome' => $usuario->getNome(),
                     'token' => $usuario->getToken()
                 ]
@@ -135,5 +136,33 @@ class UsuariosController extends Controller
 
         $this->addFlash("success", "Seu perfil foi alterado para Cliente");
         return $this->redirectToRoute("painel");
+    }
+
+    /**
+     * @Route("/painel/usuario/dados-pessoais", name="dados_pessoais")
+     * @Template("usuarios/dados-pessoais.html.twig")
+     * @param UserInterface $user
+     * @param Request $request
+     * @return array
+     */
+    public function dadosPessoais(UserInterface $user, Request $request)
+    {
+        $usuario = $this->em->getRepository(Usuario::class)->find($user);
+        $form = $this->createForm(UsuarioDadosPessoaisType::class, $usuario);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $usuario->getDadosPessoais()->setDataAlteracao(new \DateTime());
+            $this->em->persist($usuario);
+            $this->em->flush();
+
+            $this->addFlash("success", "Seu dados pessoais foram alterados com sucesso!");
+            return $this->redirectToRoute("painel");
+        }
+
+        return [
+            'form' => $form->createView()
+        ];
+
     }
 }

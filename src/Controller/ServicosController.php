@@ -8,6 +8,8 @@ use App\Entity\Usuario;
 use App\Form\ServicoType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -80,6 +82,40 @@ class ServicosController extends Controller
 
         $this->addFlash("success", "Excluído com sucesso!");
         return $this->redirectToRoute('painel');
+    }
+
+    /**
+     * @Route("/contratar-servico/{id}/{slug}/tela-pagamento", name="tela_pagamento")
+     * @Template("servicos/tela-pagamento.html.twig")
+     */
+    public function telaPagamento(Servico $servico)
+    {
+        $data = [];
+        $form = $this->createFormBuilder($data)
+            ->add('numero', TextType::class, [
+                'label' => "Número do cartão"
+            ])
+            ->add('mes_expiracao', TextType::class, [
+                'label' => "Mês"
+            ])
+            ->add('ano_expiracao', TextType::class, [
+                'label' => "Ano"
+            ])
+            ->add('cod_seguranca', TextType::class, [
+                'label' => "Cód. Segurança"
+            ])
+            ->add('enviar', ButtonType::class, [
+                'label' => 'Realizar Pagamento',
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
+            ])
+        ->getForm();
+
+        return [
+            'job' => $servico,
+            'form' => $form->createView()
+        ];
     }
 
     /**

@@ -12,21 +12,29 @@
 
         {{ form_row(form._token) }}
 
-        {{ form_label(form.nome) }}
-        {{ form_widget(form.nome) }}
+        <div class="form-row mt-3">
+            <div class="col-md-6">
+                {{ form_label(form.nome) }}
+                {{ form_widget(form.nome) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+        </div>
 
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email) }}
-
-        {{ form_label(form.senha.first) }}
-        {{ form_widget(form.senha.first) }}
-
-        {{ form_label(form.senha.second) }}
-        {{ form_widget(form.senha.second) }}
-
-        <hr>
-
-        {{ form_widget(form.enviar) }}
+    <div class="form-row mt-3">
+        <div class="col-md-6">
+            {{ form_label(form.senha.first) }}
+            {{ form_widget(form.senha.first) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_label(form.senha.second) }}
+            {{ form_widget(form.senha.second) }}
+        </div>
+    </div>
+    <hr>
+    {{ form_widget(form.enviar) }}
 
     </div>
 

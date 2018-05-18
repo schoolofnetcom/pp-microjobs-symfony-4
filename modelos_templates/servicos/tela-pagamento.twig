@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Pagamento</h2>
+            </div>
+            <div class="card-body">
+                <h3 class="display-4">Aqui vão as opções de pagamento</h3>
+                <p> .... </p>
+                <hr>
+                <h4>Contrar serviço <strong>{{ job.titulo }}</strong> por <strong>{{ job.valor }}</strong>?</h4>
+                <a href="" class="btn-lg btn btn-block btn-outline-success mt-5">CONTRATAR {{ job.usuario.nome|upper }}</a>
+            </div>
+        </div>
+
+
+
+    </div>
+
+{% endblock %}
+
+{% block title %}
+    Contratar {{ job.usuario.nome }} por {{ job.titulo }} -
+{% endblock %}
+

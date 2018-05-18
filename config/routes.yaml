@@ -5,3 +5,6 @@ admin:
     resource: "@AdminBundle"
     type: annotation
     prefix: /admin
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.yaml"

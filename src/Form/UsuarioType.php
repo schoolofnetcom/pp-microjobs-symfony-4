@@ -23,11 +23,11 @@ class UsuarioType extends AbstractType
                 'first_options' => ['label' => "Senha"],
                 'second_options' => ['label' => "Repite a Senha"],
             ])
-            ->add('status')
-            ->add('token')
-            ->add('data_cadastro')
-            ->add('data_alteracao')
-            ->add('roles')
+//            ->add('status')
+//            ->add('token')
+//            ->add('data_cadastro')
+//            ->add('data_alteracao')
+//            ->add('roles')
             ->add("enviar", SubmitType::class, [
                 'label' => "Enviar"
             ])

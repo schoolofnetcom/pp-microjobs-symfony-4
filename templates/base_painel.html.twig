@@ -16,7 +16,7 @@
                     {% if is_granted("ROLE_FREELA") %}
                     <a href="{{ path("listar_vendas") }}" class="list-group-item list-group-item-action">Vendas</a>
                     {% endif %}
-                    <a href="#" class="list-group-item list-group-item-action">Dados Pessoais</a>
+                    <a href="{{ path('dados_pessoais') }}" class="list-group-item list-group-item-action">Dados Pessoais</a>
                     {% if app.user.roles.0 == "ROLE_FREELA" %}
                     <a href="{{ path("mudar_para_cliente") }}" class="list-group-item list-group-item-action bg-light text-danger">
                         Torne-se um Cliente

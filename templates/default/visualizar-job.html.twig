@@ -46,7 +46,7 @@
                     </div>
                     <div class="card-body">
                         <h4 class="display-3 text-center text-danger text-lg-center mb-4">R$ {{ job.valor|number_format(2, ",", ".") }}</h4>
-                        <a href="{{ path("contratar_servico", {"id": job.id, "slug": job.slug}) }}" class="btn btn-lg btn-block btn-outline-success">Contratar</a>
+                        <a href="{{ path("tela_pagamento", {"id": job.id, "slug": job.slug}) }}" class="btn btn-lg btn-block btn-outline-success">Contratar</a>
                     </div>
                 </div>
                 <div class="card mt-3">
@@ -54,7 +54,14 @@
                         <h3 class="text-center">Detalhes do Profissional</h3>
                     </div>
                     <div class="card-body">
+                        <img class="rounded float-left mr-3" src="{{ vich_uploader_asset(job.usuario.dadosPessoais, 'foto_file') | imagine_filter('thumb_profile_job') }}" alt="">
                         <h4>{{ job.usuario.nome }}</h4>
+                        <hr>
+                        <div class="clearfix"></div>
+                        <div class="mt-4">
+                            {{ job.usuario.dadosPessoais.curriculo | nl2br }}
+                        </div>
+                        <p><strong>Cidade: </strong> {{ job.usuario.dadosPessoais.cidade }}/{{ job.usuario.dadosPessoais.estado }}</p>
                     </div>
                 </div>
             </div>

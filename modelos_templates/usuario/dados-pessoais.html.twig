@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Dados Pessoais</h1>
+        <hr>
+        {% form_theme form with 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(form, {"attr": {"novalidate": "novalidate"}}) }}
+
+        {{ form_row(form._token) }}
+
+        <div class="form-row">
+            <div class="col-md-6">
+                {{ form_label(form.nome) }}
+                {{ form_widget(form.nome) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+        </div>
+
+        <div class="form-row mt-3">
+            <div class="col-md-12">
+                {{ form_label(form.dados_pessoais.foto) }}
+                {{ form_widget(form.dados_pessoais.foto) }}
+            </div>
+        </div>
+        <div class="form-row mt-3">
+            <div class="col-md-12">
+                {{ form_label(form.dados_pessoais.curriculo) }}
+                {{ form_widget(form.dados_pessoais.curriculo) }}
+            </div>
+        </div>
+        <div class="form-row mt-3">
+            <div class="col-md-11">
+                {{ form_label(form.dados_pessoais.logradouro) }}
+                {{ form_widget(form.dados_pessoais.logradouro) }}
+            </div>
+            <div class="col-md-1">
+                {{ form_label(form.dados_pessoais.endereco_numero) }}
+                {{ form_widget(form.dados_pessoais.endereco_numero) }}
+            </div>
+        </div>
+        <div class="form-row mt-3">
+            <div class="col-md-6">
+                {{ form_label(form.dados_pessoais.bairro) }}
+                {{ form_widget(form.dados_pessoais.bairro) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_label(form.dados_pessoais.cidade) }}
+                {{ form_widget(form.dados_pessoais.cidade) }}
+            </div>
+            <div class="col-md-2">
+                {{ form_label(form.dados_pessoais.estado) }}
+                {{ form_widget(form.dados_pessoais.estado) }}
+            </div>
+        </div>
+        <div class="form-row mt-3">
+            <div class="col-md-4">
+                {{ form_label(form.dados_pessoais.data_nascimento) }}
+                {{ form_widget(form.dados_pessoais.data_nascimento) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_label(form.dados_pessoais.cpf) }}
+                {{ form_widget(form.dados_pessoais.cpf) }}
+            </div>
+            <div class="col-md-1">
+                {{ form_label(form.dados_pessoais.telefone_ddd) }}
+                {{ form_widget(form.dados_pessoais.telefone_ddd) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label(form.dados_pessoais.telefone_numero) }}
+                {{ form_widget(form.dados_pessoais.telefone_numero) }}
+            </div>
+        </div>
+        <hr>
+        {{ form_widget(form.enviar) }}
+    </div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
